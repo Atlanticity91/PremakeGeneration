@@ -35,11 +35,12 @@ workspace '...'
 		optimize 'On'
 		defines { 'RELEASE' }
 	filter 'configurations:Dist'
-		runtime 'Dist'
+		runtime 'Release'
 		symbols 'Off'
 		optimize 'On'
 		defines { 'DIST' }
 
 	group '...'
 		include '...'
+
 	group ''
