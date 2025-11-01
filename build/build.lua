@@ -3,14 +3,15 @@ include 'build_dependencies.lua'
 
 --- WORKSPACE
 workspace '...'
-	startproject 'MicroImGui'
+	platforms { 'x64' }
 	defaultplatform 'x64'
-	location '../'
 	configurations { 'Debug', 'Release', 'Dist' }
 	language 'C++'
 	cppdialect 'C++20'
 	targetdir '%{OutputDirs.bin}%{cfg.buildcfg}/'
 	debugdir '%{OutputDirs.bin}%{cfg.buildcfg}/'
+	location '../'
+	startproject '...'
 
 	--- WINDOWS GLOBALS
 	filter 'system:windows'
@@ -44,3 +45,4 @@ workspace '...'
 		include '...'
 
 	group ''
+
