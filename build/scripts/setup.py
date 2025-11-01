@@ -20,11 +20,11 @@ def clear_paths( ) :
 		path_ext = os.path.splitext( path )[ -1 ]
 
 		if path in [ 'bin', 'bin-int', 'solution' ] :
-			print( f'\033[33m> Deleted Folder : {path}' )
+			print( f'\033[33m> Deleted Folder : {path}\033[0m' )
 
 			shutil.rmtree( path )
 		elif path_ext.lower( ) in [ '.sln', '.vcxproj', '.filters', '.user' ] :
-			print( f'\033[33m> Deleted File : {path}' )
+			print( f'\033[33m> Deleted File : {path}\033[0m' )
 
 			os.remove( path )
 
@@ -33,8 +33,6 @@ def clear_paths( ) :
 	@note : Call premake5 for solution file generation.
 '''
 def call_premake( ) :
-	print( '\n> Calling Premake5 :' )
-
 	premake_path = Path( 'build' ) / 'premake' / 'premake5'
 	build_path = Path( 'build' ) / 'build.lua'
 	
@@ -45,7 +43,8 @@ def call_premake( ) :
 
 	premake_call.append( f'--file={str( build_path )}' )
 	premake_call.extend( sys.argv[1:] )
-
+	
+	print( f'\n> Calling Premake5 : {premake_call[1:]}' )
 	subprocess.call( premake_call )
 
 # --- MAIN LOGIC
@@ -54,3 +53,4 @@ if __name__ == "__main__" :
 
 	clear_paths( )
 	call_premake( )
+
