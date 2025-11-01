@@ -4,7 +4,7 @@
 This repo contains scripts to generate C++ solution on any platform and IDE by using [python3](https://www.python.org/) and [Premake5](https://premake.github.io/).
 
 # Requirement
-Replace `...` from `workspace` inside `build.lua` by the name of your workspace, also at the file end :
+Replace `...` from `workspace` inside `build.lua` by the name of your workspace, startproject need to be set, also at the file end :
 ``` lua
 group '...'
 		include '...'
