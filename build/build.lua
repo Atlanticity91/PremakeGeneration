@@ -1,5 +1,7 @@
 --- INCLUDES
 include 'build_dependencies.lua'
+include 'build_action.lua'
+include 'build_extensions.lua'
 
 --- WORKSPACE
 workspace '...'
@@ -8,14 +10,12 @@ workspace '...'
 	configurations { 'Debug', 'Release', 'Dist' }
 	language 'C++'
 	cppdialect 'C++20'
-	targetdir '%{OutputDirs.bin}%{cfg.buildcfg}/'
-	debugdir '%{OutputDirs.bin}%{cfg.buildcfg}/'
 	location '../'
 	startproject '...'
 
 	--- WINDOWS GLOBALS
 	filter 'system:windows'
-		flags 'MultiProcessorCompile'
+		multiprocessorcompile "On"
 		buildoptions { '/EHsc', '/Zc:preprocessor', '/Zc:__cplusplus' }
 		defines { 'WINDOWS' }
 
@@ -30,16 +30,29 @@ workspace '...'
 		symbols 'On'
 		optimize 'Off'
 		defines { 'DEBUG' }
+		targetdir '%{OutputDirs.bin}Debug/'
+		debugdir '%{OutputDirs.bin}Debug/'
+		objdir '%{OutputDirs.bin_int}%{prj.name}-Debug'
+
 	filter 'configurations:Release'
 		runtime 'Release'
 		symbols 'On'
 		optimize 'On'
 		defines { 'RELEASE' }
+		targetdir '%{OutputDirs.bin}Release/'
+		debugdir '%{OutputDirs.bin}Release/'
+		objdir '%{OutputDirs.bin_int}%{prj.name}-Release'
+
 	filter 'configurations:Dist'
 		runtime 'Release'
 		symbols 'Off'
 		optimize 'On'
 		defines { 'DIST' }
+		targetdir '%{OutputDirs.bin}Dist/'
+		debugdir '%{OutputDirs.bin}Dist/'
+		objdir '%{OutputDirs.bin_int}%{prj.name}-Dist'
+
+	files 'build/.editorconfig'
 
 	group '...'
 		include '...'
